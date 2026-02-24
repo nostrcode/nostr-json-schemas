@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://mattn.github.io/nostr-json-schemas/kind-4.json",
+  "title": "Nostr Kind 4 Event (Encrypted Direct Message)",
+  "description": "Encrypted direct message event as defined in NIP-04",
+  "allOf": [
+    {
+      "$ref": "event.json"
+    },
+    {
+      "properties": {
+        "kind": {
+          "const": 4
+        },
+        "content": {
+          "type": "string",
+          "description": "Base64-encoded encrypted message content"
+        }
+      }
+    }
+  ],
+  "definitions": {
+    "pTag": {
+      "type": "array",
+      "description": "Tag 'p' representing the recipient's pubkey. Format: [\"p\", \"<pubkey>\"]",
+      "minItems": 2,
+      "items": [
+        {
+          "type": "string",
+          "const": "p"
+        },
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "32-bytes lowercase hex-encoded public key of the recipient"
+        }
+      ]
+    }
+  }
+}
+
